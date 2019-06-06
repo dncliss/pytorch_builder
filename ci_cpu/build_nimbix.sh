@@ -2,7 +2,7 @@
 
 echo "here in build_nimbix"
 
-set -e
+set -ex
 
 PROJECT=$1
 GIT_COMMIT=$2
@@ -231,7 +231,7 @@ if [ "$ARCH" == "ppc64le" ]; then
     # Workaround is to install via pip until openblas gets updated to
     # newer version 2.20
     # conda install -y numpy openblas
-    conda install -y future libopenblas libgfortran-ng==7.3.0
+    conda install -y future libopenblas pillow libgfortran-ng==7.3.0
     pip install numpy hypothesis
 else
     conda install -y mkl numpy
