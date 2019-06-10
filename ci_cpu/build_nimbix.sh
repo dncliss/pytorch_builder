@@ -52,10 +52,10 @@ if [ "$OS" == "LINUX" ]; then
         cat /proc/cpuinfo|grep "flags" | sort | uniq
     fi
 
-    echo "Linux release:"
+    #echo "Linux release:"
     #lsb_release -a || true
 else
-    echo "Processor info"    
+    echo "Processor info"
     sysctl -n machdep.cpu.brand_string
 fi
 
@@ -116,7 +116,7 @@ if [ "$OS" == "LINUX" ]; then
     then
         if [ "$ARCH" == "ppc64le" ]; then
             if ! ls /usr/local/cuda-8.0 && ! ls /usr/local/cuda-9.*
-            then 
+            then
                 # ppc64le builds assume to have all CUDA libraries installed
                 # if they are not installed then exit and fix the problem
                 echo "Download CUDA 8.0 or CUDA 9.0 for ppc64le"
@@ -138,7 +138,7 @@ if [ "$OS" == "LINUX" ]; then
     echo "nvcc: $(which nvcc)"
 
     if [ "$ARCH" == "ppc64le" ]; then
-        # cuDNN libraries need to be downloaded from NVDIA and 
+        # cuDNN libraries need to be downloaded from NVDIA and
         # requires user registration.
         # ppc64le builds assume to have all cuDNN libraries installed
         # if they are not installed then exit and fix the problem
@@ -218,11 +218,7 @@ echo "Conda root: $CONDA_ROOT_PREFIX"
 if ! which cmake
 then
     echo "Did not find cmake"
-    if [ "$ARCH" == "ppc64le" ]; then
-        conda install -y cmake
-    else
-        conda install -y cmake
-    fi
+    conda install -y cmake
 fi
 
 # install mkl
@@ -231,8 +227,10 @@ if [ "$ARCH" == "ppc64le" ]; then
     # Workaround is to install via pip until openblas gets updated to
     # newer version 2.20
     # conda install -y numpy openblas
-    conda install -y future libopenblas pillow libgfortran-ng==7.3.0
-    pip install numpy hypothesis
+    # TEMPORARY: This seems fixed; testing numpy install via conda
+    conda install -y future libopenblas pillow libgfortran-ng==7.3.0 \
+          numpy hypothesis
+    #pip install numpy hypothesis
 else
     conda install -y mkl numpy
 fi
@@ -245,7 +243,7 @@ if [ "$ARCH" == "ppc64le" ]; then
         #git clone https://github.com/ninja-build/ninja.git
         #pushd ninja
         #git checkout tags/v1.7.2
-        #./configure.py --bootstrap 
+        #./configure.py --bootstrap
         #sudo cp ninja /usr/local/bin
         #popd
     fi
