@@ -2,7 +2,7 @@
 
 echo "here in build_nimbix"
 
-set -e
+set -ex
 
 PROJECT=$1
 GIT_COMMIT=$2
@@ -25,7 +25,7 @@ DISTRO=`awk -F= '/^NAME/{print $2}' /etc/os-release`
 
 echo "Username: $USER"
 echo "Homedir: $HOME"
-echo "Home ls:"
+#echo "Home ls:"
 #ls -alh ~/ || true
 echo "Current directory: $(pwd)"
 echo "GIT Repository: $GIT_REPO"
@@ -86,17 +86,8 @@ if [ "$OS" == "LINUX" ]; then
     fi
 fi
 
-#if ! ls ~/miniconda.sh
-#then
-#    echo "Miniconda needs to be installed"
-#    exit 1
-#else
-#    echo "Miniconda is already installed"
-#fi
-
 export PATH="/opt/miniconda/bin:$HOME/miniconda/bin:$PATH"
 echo $PATH
-
 
 export CONDA_ROOT_PREFIX=$(conda info --root)
 
@@ -116,6 +107,10 @@ else
 fi
 
 echo "Conda root: $CONDA_ROOT_PREFIX"
+
+# Install known conda requisites
+conda install -y future libopenblas pillow libgfortran-ng==7.3.0 \
+          numpy hypothesis
 
 if ! which cmake
 then
