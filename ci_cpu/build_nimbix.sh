@@ -75,6 +75,8 @@ if [ "$OS" == "LINUX" ]; then
 	rm -rf ccache
         git clone https://github.com/colesbury/ccache -b ccbin
         pushd ccache
+	# Allow implicit fallthrough without causing compilation error
+        export CFLAGS=-Wno-implicit-fallthrough
         if [ "$ARCH" == "ppc64le" ]; then
             sudo apt-get install -y curl
             /usr/bin/curl -o config.guess "http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD"
@@ -115,11 +117,11 @@ if [ "$OS" == "LINUX" ]; then
     if ! ls /usr/local/cuda-8.0
     then
         if [ "$ARCH" == "ppc64le" ]; then
-            if ! ls /usr/local/cuda-8.0 && ! ls /usr/local/cuda-9.*
+            if ! ls /usr/local/cuda-8.0 && ! ls /usr/local/cuda-9.* && ! ls /usr/local/cuda-10.*
             then
                 # ppc64le builds assume to have all CUDA libraries installed
                 # if they are not installed then exit and fix the problem
-                echo "Download CUDA 8.0 or CUDA 9.0 for ppc64le"
+                echo "Download CUDA 8.0, 9.0, or 10.0 for ppc64le"
                 exit
             fi
         else
