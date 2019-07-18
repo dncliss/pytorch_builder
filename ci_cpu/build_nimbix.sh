@@ -11,6 +11,10 @@ GITHUB_TOKEN=$4
 PYTHON_VERSION=$5
 OS=$6
 
+# Repo parent, as in https://github.com/$GIT_REPO_PARENT/.....
+#  Usually just set to pytorch, unless debugging from a fork
+GIT_REPO_PARENT=dncliss
+
 if [ "$#" -ne 6 ]
 then
   echo "Did not find 6 arguments" >&2
@@ -313,9 +317,9 @@ pip uninstall -y torch || true
 
 echo "Installing $PROJECT at branch $GIT_BRANCH and commit $GIT_COMMIT"
 rm -rf $PROJECT
-git clone https://github.com/pytorch/$PROJECT --quiet
+git clone https://github.com/$GIT_REPO_PARENT/$PROJECT --quiet
 cd $PROJECT
-git fetch --tags https://github.com/pytorch/$PROJECT +refs/pull/*:refs/remotes/origin/pr/* --quiet
+git fetch --tags https://github.com/$GIT_REPO_PARENT/$PROJECT +refs/pull/*:refs/remotes/origin/pr/* --quiet
 git checkout $GIT_BRANCH
 git submodule update --init --recursive
 
@@ -405,7 +409,7 @@ if [ "$OS" == "LINUX" ]; then
 
             rm -rf tmp
             echo $GITHUB_TOKEN >/tmp/token
-            git clone https://pytorchbot:$GITHUB_TOKEN@github.com/pytorch/pytorch.github.io -b master tmp --quiet 2>&1 | grep -v $GITHUB_TOKEN || true
+            git clone https://pytorchbot:$GITHUB_TOKEN@github.com/$GIT_REPO_PARENT/pytorch.github.io -b master tmp --quiet 2>&1 | grep -v $GITHUB_TOKEN || true
             cd tmp
             git rm -rf docs/master || true
             mv ../build/html docs/master
@@ -416,7 +420,7 @@ if [ "$OS" == "LINUX" ]; then
             git config user.name "pytorchbot"
             git commit -m "auto-generating sphinx docs"
             git status
-            git push https://pytorchbot:$GITHUB_TOKEN@github.com/pytorch/pytorch.github.io master:master 2>&1 | grep -v $GITHUB_TOKEN || true
+            git push https://pytorchbot:$GITHUB_TOKEN@github.com/$GIT_REPO_PARENT/pytorch.github.io master:master 2>&1 | grep -v $GITHUB_TOKEN || true
             git status
             cd ..
             rm -rf tmp
