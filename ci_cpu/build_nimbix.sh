@@ -13,7 +13,7 @@ OS=$6
 
 # Repo parent, as in https://github.com/$GIT_REPO_PARENT/.....
 #  Usually just set to pytorch, unless debugging from a fork
-GIT_REPO_PARENT=dncliss
+GIT_REPO_PARENT=pytorch
 
 if [ "$#" -ne 6 ]
 then
