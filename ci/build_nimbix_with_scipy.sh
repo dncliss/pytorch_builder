@@ -110,15 +110,16 @@ echo "Conda root: $CONDA_ROOT_PREFIX"
 
 # Install known conda requisites
 conda install -y future libopenblas pillow libgfortran-ng==7.3.0 \
-          numpy hypothesis
+          numpy hypothesis cmake ninja
 
+# Check that cmake is in path
 if ! which cmake
 then
     echo "Did not find cmake"
     exit 1
 fi
 
-#install ninja
+# Check that ninja is in path
 if ! which ninja
 then
     echo "Did not find ninja"
