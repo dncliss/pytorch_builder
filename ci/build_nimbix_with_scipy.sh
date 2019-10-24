@@ -86,8 +86,11 @@ if [ "$OS" == "LINUX" ]; then
     fi
 fi
 
-export PATH="/opt/miniconda/bin:$HOME/miniconda/bin:$PATH"
+export PATH="/opt/miniconda/bin:$HOME/miniconda/bin:/usr/jenkins/miniconda/bin:$PATH"
 echo $PATH
+ls /opt/miniconda/bin
+ls $HOME/miniconda/bin
+ls /usr/jenkins/miniconda/bin
 
 export CONDA_ROOT_PREFIX=$(conda info --root)
 
@@ -167,7 +170,6 @@ pip install --upgrade pip
 pip install -r requirements.txt || true
 chown -R jenkins /home/jenkins
 export LD_LIBRARY_PATH=/usr/local/magma/lib:$LD_LIBRARY_PATH:/opt/miniconda/lib
-export PATH=/home/jenkins/miniconda/bin:/opt/miniconda/bin:$PATH
 if [ "$CREATE_ARTIFACTS" == "YES" ]; then
   python setup.py bdist_wheel
 else
