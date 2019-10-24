@@ -86,11 +86,9 @@ if [ "$OS" == "LINUX" ]; then
     fi
 fi
 
-export PATH="/opt/miniconda/bin:$HOME/miniconda/bin:/usr/jenkins/miniconda/bin:$PATH"
+export JENKINS_HOME=/home/jenkins
+export PATH="$JENKINS_HOME/miniconda/bin:$PATH"
 echo $PATH
-ls /opt/miniconda/bin
-ls $HOME/miniconda/bin
-ls /usr/jenkins/miniconda/bin
 
 export CONDA_ROOT_PREFIX=$(conda info --root)
 
@@ -104,7 +102,7 @@ then
 	conda create -n py2k python=2 -y
     fi
     source activate py2k
-    export CONDA_ROOT_PREFIX="$HOME/miniconda/envs/py2k"
+    export CONDA_ROOT_PREFIX="$JENKINS_HOME/miniconda/envs/py2k"
 else
     source activate root
 fi
