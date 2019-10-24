@@ -167,6 +167,7 @@ pip install --upgrade pip
 pip install -r requirements.txt || true
 chown -R jenkins /home/jenkins
 export LD_LIBRARY_PATH=/usr/local/magma/lib:$LD_LIBRARY_PATH:/opt/miniconda/lib
+export PATH=/home/jenkins/miniconda/bin:/opt/miniconda/bin:$PATH
 if [ "$CREATE_ARTIFACTS" == "YES" ]; then
   python setup.py bdist_wheel
 else
@@ -191,9 +192,9 @@ chown -R jenkins /home/jenkins
 # New pytorch test script
 if [ $PYTHON_VERSION -eq 2 ]
 then
-  time su jenkins -c "ulimit -s unlimited; export PATH=/opt/miniconda/envs/py2k/bin:$PATH; export VALGRIND=${VALGRIND:=OFF}; .jenkins/pytorch/test.sh"
+  time su jenkins -c "ulimit -s unlimited; export PATH=/home/jenkins/miniconda/bin:/opt/miniconda/envs/py2k/bin:$PATH; export VALGRIND=${VALGRIND:=OFF}; .jenkins/pytorch/test.sh"
 else
-  time su jenkins -c "ulimit -s unlimited; export PATH=/opt/miniconda/bin:$PATH; export VALGRIND=${VALGRIND:=OFF}; .jenkins/pytorch/test.sh"
+  time su jenkins -c "ulimit -s unlimited; export PATH=/home/jenkins/miniconda/bin:/opt/miniconda/bin:$PATH; export VALGRIND=${VALGRIND:=OFF}; .jenkins/pytorch/test.sh"
 fi
 
 echo "ALL CHECKS PASSED"
