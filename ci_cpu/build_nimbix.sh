@@ -364,6 +364,11 @@ if [ ! -z "$jenkins_nightly" ]; then
     python onnx-pytorch/test/test_caffe2.py
 fi
 
+if [ "$BUILD_ONLY"  == "YES" ]; then
+    echo "PyTorch build complete"
+    exit 0
+fi
+
 echo "Testing pytorch"
 export OMP_NUM_THREADS=2
 export MKL_NUM_THREADS=2
