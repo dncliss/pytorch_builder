@@ -377,7 +377,8 @@ export MKL_NUM_THREADS=2
 # time test/run_test.sh
 
 # New pytorch test script
-LD_LIBRARY_PATH=/usr/local/magma/lib:$LD_LIBRARY_PATH:/home/jenkins/miniconda/lib python test/run_test.py --verbose
+LD_LIBRARY_PATH=/usr/local/magma/lib:$LD_LIBRARY_PATH:/home/jenkins/miniconda/lib python test/run_test.py --verbose \
+        -x test_cpp_extensions_aot_no_ninja test_cpp_extensions_aot_ninja test_cpp_extensions_jit
 
 echo "ALL CHECKS PASSED"
 
