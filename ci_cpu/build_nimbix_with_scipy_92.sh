@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
-
-echo "here in build_nimbix"
+# *************************************************************************
+# (C) Copyright IBM Corp. 2018,2021. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# *************************************************************************
+echo "here in build_nimbix_with_scipy_92"
 
 set -e
 
@@ -57,7 +71,7 @@ if [ "$OS" == "LINUX" ]; then
     echo "Linux release:"
     #lsb_release -a || true
 else
-    echo "Processor info"    
+    echo "Processor info"
     sysctl -n machdep.cpu.brand_string
 fi
 
@@ -115,7 +129,7 @@ if [ "$OS" == "LINUX" ]; then
     then
         if [ "$ARCH" == "ppc64le" ]; then
             if ! ls /usr/local/cuda-9.0 && ! ls /usr/local/cuda-9.2
-            then 
+            then
                 # ppc64le builds assume to have all CUDA libraries installed
                 # if they are not installed then exit and fix the problem
                 echo "Download CUDA 9.0 or CUDA 9.2 for ppc64le"
@@ -137,11 +151,11 @@ if [ "$OS" == "LINUX" ]; then
     echo "nvcc: $(which nvcc)"
 
     if [ "$ARCH" == "ppc64le" ]; then
-        # cuDNN libraries need to be downloaded from NVDIA and 
+        # cuDNN libraries need to be downloaded from NVDIA and
         # requires user registration.
         # ppc64le builds assume to have all cuDNN libraries installed
         # if they are not installed then exit and fix the problem
-        if ! ls /usr/lib/powerpc64le-linux-gnu/libcudnn.so.6.0.21 && ! ls /usr/lib/powerpc64le-linux-gnu/libcudnn.so.7.* 
+        if ! ls /usr/lib/powerpc64le-linux-gnu/libcudnn.so.6.0.21 && ! ls /usr/lib/powerpc64le-linux-gnu/libcudnn.so.7.*
         then
             echo "Install (CUDA 8) CuDNN 6.0 or (CUDA 9) 7.0 for ppc64le"
             exit
@@ -233,7 +247,7 @@ if [ "$ARCH" == "ppc64le" ]; then
         git clone https://github.com/ninja-build/ninja.git
         pushd ninja
         git checkout tags/v1.7.2
-        ./configure.py --bootstrap 
+        ./configure.py --bootstrap
         sudo cp ninja /usr/local/bin
         popd
     fi
