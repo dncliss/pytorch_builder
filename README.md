@@ -1,4 +1,4 @@
-## INTRODUCTION to OSUOSL pytorch_builder scripts
+## Introduction to OSUOSL pytorch_builder scripts
  
 This repository provides build scripts for execution of pytorch CI builds on the ppc64le platform at
 the Oregon State University Open Source Lab (OSUOSL). The scripts are available under the
@@ -55,7 +55,7 @@ Subdirectories found here: <br>
 See README.md in each sub-directory to learn more.
 
 
-### REQUESTING ACCESS TO OSUOSL LAB:
+### Requesting access to OSUOSL lab:
 
 Requests to create an account and get access to the CI environment are limited and must be approved. To
 request access, from the OSUOSL home page, proceed to the request form found via SERVICES -->
