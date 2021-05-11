@@ -29,7 +29,7 @@ pwd
 ls -l ci
 ls -l /home/jenkins
 # The scripts we want are in the ci directory; copy to jenkins
-sudo -E cp ci/* /home/jenkins
+sudo -E cp -r ci/* /home/jenkins
 cd /home/jenkins 
 export BUILD_ENVIRONMENT=pytorch-ppc64le-cuda10-cudnn7-py3-test
 export GIT_REPO=pytorch

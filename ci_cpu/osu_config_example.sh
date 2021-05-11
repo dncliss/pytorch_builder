@@ -32,7 +32,7 @@ sudo rm /etc/apt/sources.list.d/cuda.list
 sudo rm /etc/apt/sources.list.d/nvidia-ml.list
 
 sudo apt-get install libopenmpi-dev -y
-chmod +x ./ci_cpu/build_nimbix.sh
+chmod +x ./ci_cpu/build_pytorch_cpu.sh
 
 sudo apt-get -y upgrade
 
