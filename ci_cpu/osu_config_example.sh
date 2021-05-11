@@ -68,4 +68,4 @@ export BUILD_ONLY='YES'
 
 cd $HOME
 
-$WORKDIR/ci_cpu/build_nimbix.sh  pytorch HEAD master foo 3 LINUX
+$WORKDIR/ci_cpu/build_pytorch_cpu.sh  pytorch HEAD master foo 3 LINUX

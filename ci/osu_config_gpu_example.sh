@@ -68,4 +68,4 @@ export BUILD_ONLY='YES'
 export GIT_BRANCH=origin/master
 
 cd /home/jenkins
-sudo -E ./build_mpi.sh
+sudo -E ./build_pytorch.sh

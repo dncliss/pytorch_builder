@@ -26,4 +26,4 @@ GIT_BRANCH=${GIT_BRANCH:=master}
 #
 # Actual build happens in script below; current script is just a set-up wrapper.
 #
-./build_nimbix_with_scipy.sh  pytorch HEAD ${GIT_BRANCH} foo ${PYTHON_VERSION} LINUX ${BUILD_ONLY} ${CREATE_ARTIFACTS} ${GIT_REPO}
+./build_pytorch_with_gpu.sh  pytorch HEAD ${GIT_BRANCH} foo ${PYTHON_VERSION} LINUX ${BUILD_ONLY} ${CREATE_ARTIFACTS} ${GIT_REPO}

@@ -12,9 +12,10 @@ In the configuration, the "Docker image to use" id tag box specifies which Docke
 An example is: osuosl/ubuntu-ppc64le-cuda:10.2-cudnn7 <br>
 The docker image name indicates the cuda and cudnn versions used.
 
-The CI configuration clones this directory and executes the ./ci_cpu/build_nimbix.sh with some arguments
-to execute the build and test inside the docker container. Most other script files here were cloned from the
-avmgithub/pytorch_builder tree but are no longer used.
+The CI configuration clones this directory and executes the ./ci_cpu/build_pytorch_cpu.sh with some arguments
+to execute the build and test inside the docker container. Other script files here were cloned from the
+avmgithub/pytorch_builder tree but are no longer used as a normal part of the CI; these are moved to
+the archive subdirectory.
 
 See the osu_config_example.sh as an example of what is executed from the CI Jenkins
 configuration screen.

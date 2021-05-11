@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # *************************************************************************
-echo "here in build_nimbix"
+echo "here in build_pytorch_cpu"
 
 set -ex
 
